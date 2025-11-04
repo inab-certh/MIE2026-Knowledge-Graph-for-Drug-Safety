@@ -1,0 +1,168 @@
+@prefix chebi: <http://purl.obolibrary.org/obo/CHEBI_> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix kg: <http://example.org/adr-kg/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix reactome: <https://reactome.org/content/detail/> .
+@prefix uniprot: <http://purl.uniprot.org/uniprot/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kg:AMPK_Mechanism a kg:MechanisticHypothesis ;
+    rdfs:label "AMPK-mediated effects" ;
+    kg:evidenceLevel "Well-established in literature" ;
+    kg:involves kg:AMPK_Signaling_Pathway,
+        kg:PRKAB1 ;
+    rdfs:comment "AMPK activation by metformin affects cellular energy metabolism and may contribute to metabolic effects" .
+
+kg:GI_Mechanism a kg:MechanisticHypothesis ;
+    rdfs:label "GI accumulation mechanism" ;
+    kg:evidenceLevel "Hypothetical - requires validation" ;
+    kg:involves kg:SLC47A1,
+        kg:Xenobiotic_Transport_Pathway ;
+    kg:linkedTo kg:Diarrhea,
+        kg:Nausea,
+        kg:Vomiting ;
+    rdfs:comment "Metformin accumulation in GI tract due to MATE1 transporter activity may contribute to GI adverse effects" .
+
+kg:MetforminKG a owl:Ontology ;
+    dcterms:created "2025-11-04T11:54:56.380183"^^xsd:dateTime ;
+    dcterms:description "Integration of metformin data from DrugBank, SIDER, and Reactome for ADR mechanism analysis" ;
+    dcterms:title "Metformin ADR Knowledge Graph - Proof of Concept" .
+
+kg:Metformin_ETFDH_Interaction a kg:DrugTargetInteraction ;
+    kg:actionType "Inhibitor" ;
+    kg:drug kg:Metformin ;
+    kg:pharmacologicalAction "Yes" ;
+    kg:target kg:ETFDH ;
+    dcterms:source "DrugBank" .
+
+kg:Metformin_PRKAB1_Interaction a kg:DrugTargetInteraction ;
+    kg:actionType "Inducer/Activator" ;
+    kg:drug kg:Metformin ;
+    kg:pharmacologicalAction "Yes" ;
+    kg:target kg:PRKAB1 ;
+    dcterms:source "DrugBank" .
+
+kg:Metformin_SLC47A1_Interaction a kg:DrugTargetInteraction ;
+    kg:actionType "Modulator" ;
+    kg:drug kg:Metformin ;
+    kg:pharmacologicalAction "Unknown" ;
+    kg:target kg:SLC47A1 ;
+    dcterms:source "DrugBank" .
+
+kg:Mitochondrial_Mechanism a kg:MechanisticHypothesis ;
+    rdfs:label "Mitochondrial complex I inhibition" ;
+    kg:evidenceLevel "Well-established in literature" ;
+    kg:involves kg:ETFDH ;
+    rdfs:comment "Metformin inhibition of mitochondrial complex I affects cellular respiration" .
+
+kg:GastrointestinalDisorder a kg:AdverseDrugReaction ;
+    rdfs:label "Gastrointestinal disorder" ;
+    kg:frequency "common" ;
+    kg:incidenceRate "42% - 48.3%" ;
+    dcterms:source "SIDER" .
+
+kg:Infection a kg:AdverseDrugReaction ;
+    rdfs:label "Infection" ;
+    kg:incidenceRate "20.5% - 20.9%" ;
+    dcterms:source "SIDER" .
+
+kg:AMPK_Signaling_Pathway a kg:Pathway ;
+    rdfs:label "AMPK-induced ERAD and lysosome mediated degradation of PD-L1" ;
+    kg:pathwayCategory "Signal Transduction" ;
+    dcterms:source "Reactome" .
+
+kg:Diarrhea a kg:AdverseDrugReaction ;
+    rdfs:label "Diarrhea" ;
+    kg:frequency "very common" ;
+    kg:incidenceRate "9.6% - 53.2%" ;
+    kg:meddraClass "Gastrointestinal disorder" ;
+    kg:placeboRate "2.6% - 11.7%" ;
+    dcterms:source "SIDER" .
+
+kg:Nausea a kg:AdverseDrugReaction ;
+    rdfs:label "Nausea" ;
+    kg:frequency "very common" ;
+    kg:incidenceRate "6.5% - 25.5%" ;
+    kg:placeboRate "1.5% - 8.3%" ;
+    dcterms:source "SIDER" .
+
+kg:Vomiting a kg:AdverseDrugReaction ;
+    rdfs:label "Vomiting" ;
+    kg:frequency "very common" ;
+    kg:incidenceRate "3.45% - 25.5%" ;
+    kg:placeboRate "1.5% - 8.3%" ;
+    dcterms:source "SIDER" .
+
+kg:Xenobiotic_Transport_Pathway a kg:Pathway ;
+    rdfs:label "Xenobiotic metabolism and transport" ;
+    kg:pathwayCategory "Drug Metabolism" ;
+    dcterms:source "Reactome" .
+
+reactome:R-HSA-434650 a kg:BiochemicalReaction ;
+    rdfs:label "MATEs mediate extrusion of xenobiotics" ;
+    kg:partOf kg:Xenobiotic_Transport_Pathway ;
+    kg:reactomeID "R-HSA-434650" ;
+    dcterms:source "Reactome" ;
+    rdfs:comment "MATE1 (SLC47A1) mediates renal and hepatic excretion of metformin and other cationic drugs" .
+
+reactome:R-HSA-9931292 a kg:BiochemicalReaction ;
+    rdfs:label "AMPK phosphorylates CD274" ;
+    kg:partOf kg:AMPK_Signaling_Pathway ;
+    kg:reactomeID "R-HSA-9931292" ;
+    dcterms:source "Reactome" ;
+    rdfs:comment "AMPK activated by metformin phosphorylates PD-L1 (CD274) leading to its degradation" .
+
+kg:ETFDH a kg:Protein ;
+    rdfs:label "Electron transfer flavoprotein-ubiquinone oxidoreductase, mitochondrial" ;
+    kg:geneSymbol "ETFDH" ;
+    kg:generalFunction "Accepts electrons from ETF and reduces ubiquinone" ;
+    kg:molecularWeight "68494.96"^^xsd:float ;
+    kg:organism "Homo sapiens" ;
+    kg:specificFunction "4 iron, 4 sulfur cluster binding" ;
+    kg:uniprotID uniprot:Q16134 ;
+    dcterms:source "DrugBank" .
+
+kg:Metformin a kg:Drug ;
+    rdfs:label "Metformin"@en ;
+    kg:atcCode "A10BA02" ;
+    kg:causes kg:Diarrhea,
+        kg:GastrointestinalDisorder,
+        kg:Infection,
+        kg:Nausea,
+        kg:Vomiting ;
+    kg:chebiID chebi:6801 ;
+    kg:drugBankID "DB00331" ;
+    kg:drugClass "Antidiabetic, Biguanide" ;
+    kg:participatesIn reactome:R-HSA-434650,
+        reactome:R-HSA-9931292 ;
+    kg:pubChemCID 4091 ;
+    kg:targets kg:ETFDH,
+        kg:PRKAB1,
+        kg:SLC47A1 ;
+    rdfs:comment "A medication used alongside diet and exercise to control blood sugar in patients with type 2 diabetes." .
+
+kg:PRKAB1 a kg:Protein ;
+    rdfs:label "5'-AMP-activated protein kinase subunit beta-1" ;
+    kg:geneSymbol "PRKAB1" ;
+    kg:generalFunction "Non-catalytic subunit of AMP-activated protein kinase (AMPK), an energy sensor protein kinase" ;
+    kg:molecularWeight "30382.085"^^xsd:float ;
+    kg:organism "Homo sapiens" ;
+    kg:participatesIn reactome:R-HSA-9931292 ;
+    kg:specificFunction "protein kinase binding" ;
+    kg:uniprotID uniprot:Q9Y478 ;
+    dcterms:source "DrugBank" .
+
+kg:SLC47A1 a kg:Protein ;
+    rdfs:label "Multidrug and toxin extrusion protein 1" ;
+    kg:commonName "MATE1" ;
+    kg:geneSymbol "SLC47A1" ;
+    kg:generalFunction "Multidrug efflux pump that functions as a H(+)/organic cation antiporter" ;
+    kg:molecularWeight "61921.585"^^xsd:float ;
+    kg:organism "Homo sapiens" ;
+    kg:participatesIn reactome:R-HSA-434650 ;
+    kg:specificFunction "antiporter activity" ;
+    kg:uniprotID uniprot:Q96FL8 ;
+    dcterms:source "DrugBank" ;
+    rdfs:comment "Plays a physiological role in the excretion of cationic compounds including drugs and toxins through kidney and liver" .
+
