@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:kg="http://example.org/adr-kg/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Metformin">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Drug"/>
+    <rdfs:label xml:lang="en">Metformin</rdfs:label>
+    <kg:drugBankID>DB00331</kg:drugBankID>
+    <kg:chebiID rdf:resource="http://purl.obolibrary.org/obo/CHEBI_6801"/>
+    <kg:pubChemCID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4091</kg:pubChemCID>
+    <kg:atcCode>A10BA02</kg:atcCode>
+    <kg:drugClass>Antidiabetic, Biguanide</kg:drugClass>
+    <rdfs:comment>A medication used alongside diet and exercise to control blood sugar in patients with type 2 diabetes.</rdfs:comment>
+    <kg:targets rdf:resource="http://example.org/adr-kg/ETFDH"/>
+    <kg:targets rdf:resource="http://example.org/adr-kg/PRKAB1"/>
+    <kg:targets rdf:resource="http://example.org/adr-kg/SLC47A1"/>
+    <kg:participatesIn rdf:resource="https://reactome.org/content/detail/R-HSA-9931292"/>
+    <kg:participatesIn rdf:resource="https://reactome.org/content/detail/R-HSA-434650"/>
+    <kg:causes rdf:resource="http://example.org/adr-kg/Diarrhea"/>
+    <kg:causes rdf:resource="http://example.org/adr-kg/GastrointestinalDisorder"/>
+    <kg:causes rdf:resource="http://example.org/adr-kg/Nausea"/>
+    <kg:causes rdf:resource="http://example.org/adr-kg/Vomiting"/>
+    <kg:causes rdf:resource="http://example.org/adr-kg/Infection"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/ETFDH">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Protein"/>
+    <rdfs:label>Electron transfer flavoprotein-ubiquinone oxidoreductase, mitochondrial</rdfs:label>
+    <kg:geneSymbol>ETFDH</kg:geneSymbol>
+    <kg:uniprotID rdf:resource="http://purl.uniprot.org/uniprot/Q16134"/>
+    <kg:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">68494.96</kg:molecularWeight>
+    <kg:organism>Homo sapiens</kg:organism>
+    <kg:generalFunction>Accepts electrons from ETF and reduces ubiquinone</kg:generalFunction>
+    <kg:specificFunction>4 iron, 4 sulfur cluster binding</kg:specificFunction>
+    <dcterms:source>DrugBank</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/SLC47A1">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Protein"/>
+    <rdfs:label>Multidrug and toxin extrusion protein 1</rdfs:label>
+    <kg:geneSymbol>SLC47A1</kg:geneSymbol>
+    <kg:commonName>MATE1</kg:commonName>
+    <kg:uniprotID rdf:resource="http://purl.uniprot.org/uniprot/Q96FL8"/>
+    <kg:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">61921.585</kg:molecularWeight>
+    <kg:organism>Homo sapiens</kg:organism>
+    <kg:generalFunction>Multidrug efflux pump that functions as a H(+)/organic cation antiporter</kg:generalFunction>
+    <kg:specificFunction>antiporter activity</kg:specificFunction>
+    <rdfs:comment>Plays a physiological role in the excretion of cationic compounds including drugs and toxins through kidney and liver</rdfs:comment>
+    <dcterms:source>DrugBank</dcterms:source>
+    <kg:participatesIn rdf:resource="https://reactome.org/content/detail/R-HSA-434650"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Metformin_PRKAB1_Interaction">
+    <rdf:type rdf:resource="http://example.org/adr-kg/DrugTargetInteraction"/>
+    <kg:drug rdf:resource="http://example.org/adr-kg/Metformin"/>
+    <kg:target rdf:resource="http://example.org/adr-kg/PRKAB1"/>
+    <kg:actionType>Inducer/Activator</kg:actionType>
+    <kg:pharmacologicalAction>Yes</kg:pharmacologicalAction>
+    <dcterms:source>DrugBank</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/MetforminKG">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dcterms:title>Metformin ADR Knowledge Graph - Proof of Concept</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2025-11-04T11:54:56.380183</dcterms:created>
+    <dcterms:description>Integration of metformin data from DrugBank, SIDER, and Reactome for ADR mechanism analysis</dcterms:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://reactome.org/content/detail/R-HSA-434650">
+    <rdf:type rdf:resource="http://example.org/adr-kg/BiochemicalReaction"/>
+    <rdfs:label>MATEs mediate extrusion of xenobiotics</rdfs:label>
+    <kg:reactomeID>R-HSA-434650</kg:reactomeID>
+    <rdfs:comment>MATE1 (SLC47A1) mediates renal and hepatic excretion of metformin and other cationic drugs</rdfs:comment>
+    <dcterms:source>Reactome</dcterms:source>
+    <kg:partOf rdf:resource="http://example.org/adr-kg/Xenobiotic_Transport_Pathway"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/GastrointestinalDisorder">
+    <rdf:type rdf:resource="http://example.org/adr-kg/AdverseDrugReaction"/>
+    <rdfs:label>Gastrointestinal disorder</rdfs:label>
+    <kg:frequency>common</kg:frequency>
+    <kg:incidenceRate>42% - 48.3%</kg:incidenceRate>
+    <dcterms:source>SIDER</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Metformin_ETFDH_Interaction">
+    <rdf:type rdf:resource="http://example.org/adr-kg/DrugTargetInteraction"/>
+    <kg:drug rdf:resource="http://example.org/adr-kg/Metformin"/>
+    <kg:target rdf:resource="http://example.org/adr-kg/ETFDH"/>
+    <kg:actionType>Inhibitor</kg:actionType>
+    <kg:pharmacologicalAction>Yes</kg:pharmacologicalAction>
+    <dcterms:source>DrugBank</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Infection">
+    <rdf:type rdf:resource="http://example.org/adr-kg/AdverseDrugReaction"/>
+    <rdfs:label>Infection</rdfs:label>
+    <kg:incidenceRate>20.5% - 20.9%</kg:incidenceRate>
+    <dcterms:source>SIDER</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Diarrhea">
+    <rdf:type rdf:resource="http://example.org/adr-kg/AdverseDrugReaction"/>
+    <rdfs:label>Diarrhea</rdfs:label>
+    <kg:frequency>very common</kg:frequency>
+    <kg:incidenceRate>9.6% - 53.2%</kg:incidenceRate>
+    <kg:placeboRate>2.6% - 11.7%</kg:placeboRate>
+    <kg:meddraClass>Gastrointestinal disorder</kg:meddraClass>
+    <dcterms:source>SIDER</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Nausea">
+    <rdf:type rdf:resource="http://example.org/adr-kg/AdverseDrugReaction"/>
+    <rdfs:label>Nausea</rdfs:label>
+    <kg:frequency>very common</kg:frequency>
+    <kg:incidenceRate>6.5% - 25.5%</kg:incidenceRate>
+    <kg:placeboRate>1.5% - 8.3%</kg:placeboRate>
+    <dcterms:source>SIDER</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Vomiting">
+    <rdf:type rdf:resource="http://example.org/adr-kg/AdverseDrugReaction"/>
+    <rdfs:label>Vomiting</rdfs:label>
+    <kg:frequency>very common</kg:frequency>
+    <kg:incidenceRate>3.45% - 25.5%</kg:incidenceRate>
+    <kg:placeboRate>1.5% - 8.3%</kg:placeboRate>
+    <dcterms:source>SIDER</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/GI_Mechanism">
+    <rdf:type rdf:resource="http://example.org/adr-kg/MechanisticHypothesis"/>
+    <rdfs:label>GI accumulation mechanism</rdfs:label>
+    <kg:involves rdf:resource="http://example.org/adr-kg/SLC47A1"/>
+    <kg:involves rdf:resource="http://example.org/adr-kg/Xenobiotic_Transport_Pathway"/>
+    <kg:linkedTo rdf:resource="http://example.org/adr-kg/Diarrhea"/>
+    <kg:linkedTo rdf:resource="http://example.org/adr-kg/Nausea"/>
+    <kg:linkedTo rdf:resource="http://example.org/adr-kg/Vomiting"/>
+    <rdfs:comment>Metformin accumulation in GI tract due to MATE1 transporter activity may contribute to GI adverse effects</rdfs:comment>
+    <kg:evidenceLevel>Hypothetical - requires validation</kg:evidenceLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Xenobiotic_Transport_Pathway">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Pathway"/>
+    <rdfs:label>Xenobiotic metabolism and transport</rdfs:label>
+    <kg:pathwayCategory>Drug Metabolism</kg:pathwayCategory>
+    <dcterms:source>Reactome</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Mitochondrial_Mechanism">
+    <rdf:type rdf:resource="http://example.org/adr-kg/MechanisticHypothesis"/>
+    <rdfs:label>Mitochondrial complex I inhibition</rdfs:label>
+    <kg:involves rdf:resource="http://example.org/adr-kg/ETFDH"/>
+    <rdfs:comment>Metformin inhibition of mitochondrial complex I affects cellular respiration</rdfs:comment>
+    <kg:evidenceLevel>Well-established in literature</kg:evidenceLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/AMPK_Signaling_Pathway">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Pathway"/>
+    <rdfs:label>AMPK-induced ERAD and lysosome mediated degradation of PD-L1</rdfs:label>
+    <kg:pathwayCategory>Signal Transduction</kg:pathwayCategory>
+    <dcterms:source>Reactome</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://reactome.org/content/detail/R-HSA-9931292">
+    <rdf:type rdf:resource="http://example.org/adr-kg/BiochemicalReaction"/>
+    <rdfs:label>AMPK phosphorylates CD274</rdfs:label>
+    <kg:reactomeID>R-HSA-9931292</kg:reactomeID>
+    <rdfs:comment>AMPK activated by metformin phosphorylates PD-L1 (CD274) leading to its degradation</rdfs:comment>
+    <dcterms:source>Reactome</dcterms:source>
+    <kg:partOf rdf:resource="http://example.org/adr-kg/AMPK_Signaling_Pathway"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/Metformin_SLC47A1_Interaction">
+    <rdf:type rdf:resource="http://example.org/adr-kg/DrugTargetInteraction"/>
+    <kg:drug rdf:resource="http://example.org/adr-kg/Metformin"/>
+    <kg:target rdf:resource="http://example.org/adr-kg/SLC47A1"/>
+    <kg:actionType>Modulator</kg:actionType>
+    <kg:pharmacologicalAction>Unknown</kg:pharmacologicalAction>
+    <dcterms:source>DrugBank</dcterms:source>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/PRKAB1">
+    <rdf:type rdf:resource="http://example.org/adr-kg/Protein"/>
+    <rdfs:label>5'-AMP-activated protein kinase subunit beta-1</rdfs:label>
+    <kg:geneSymbol>PRKAB1</kg:geneSymbol>
+    <kg:uniprotID rdf:resource="http://purl.uniprot.org/uniprot/Q9Y478"/>
+    <kg:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">30382.085</kg:molecularWeight>
+    <kg:organism>Homo sapiens</kg:organism>
+    <kg:generalFunction>Non-catalytic subunit of AMP-activated protein kinase (AMPK), an energy sensor protein kinase</kg:generalFunction>
+    <kg:specificFunction>protein kinase binding</kg:specificFunction>
+    <dcterms:source>DrugBank</dcterms:source>
+    <kg:participatesIn rdf:resource="https://reactome.org/content/detail/R-HSA-9931292"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/adr-kg/AMPK_Mechanism">
+    <rdf:type rdf:resource="http://example.org/adr-kg/MechanisticHypothesis"/>
+    <rdfs:label>AMPK-mediated effects</rdfs:label>
+    <kg:involves rdf:resource="http://example.org/adr-kg/PRKAB1"/>
+    <kg:involves rdf:resource="http://example.org/adr-kg/AMPK_Signaling_Pathway"/>
+    <rdfs:comment>AMPK activation by metformin affects cellular energy metabolism and may contribute to metabolic effects</rdfs:comment>
+    <kg:evidenceLevel>Well-established in literature</kg:evidenceLevel>
+  </rdf:Description>
+</rdf:RDF>
