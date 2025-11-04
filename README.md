@@ -15,8 +15,6 @@ This repository contains code and data for our MIE 2026 paper: *"Integrating Mul
 
 - `scripts/` - Python code for graph construction and visualization
 - `output/` - Generated RDF files and figures
-- `data/` - Source data (identifier mappings)
-- `docs/` - Conference paper (PDF)
 
 ## Data Sources
 
