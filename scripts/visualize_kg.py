@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import networkx as nx
 import os
-import scipy
 from rdflib import Graph, RDF, RDFS, Namespace
 
 os.makedirs('output', exist_ok=True)
@@ -149,8 +148,7 @@ clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrug
 key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
-#pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
-pos2 = nx.kamada_kawai_layout(H)
+pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
 
 # Draw simplified version
 for node_type, style in node_styles.items():
