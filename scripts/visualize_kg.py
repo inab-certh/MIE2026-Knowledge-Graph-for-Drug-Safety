@@ -68,7 +68,7 @@ for s, p, o in g:
 fig, ax = plt.subplots(figsize=(20, 14), facecolor='white')
 
 # Use hierarchical layout
-pos = nx.spring_layout(G, k=2.5, iterations=100, seed=42)
+pos = nx.shell_layout(G)
 
 # Draw nodes by type
 for node_type, style in node_styles.items():
@@ -150,7 +150,7 @@ clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrug
 key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
-pos2 = nx.spring_layout(H, k=4, iterations=100, seed=42)
+pos2 = nx.shell_layout(H)
 
 # Draw simplified version
 for node_type, style in node_styles.items():
