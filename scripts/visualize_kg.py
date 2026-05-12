@@ -60,9 +60,7 @@ for s, p, o in g:
         G.add_edge(s_str, o_str)
         edge_labels_dict[(s_str, o_str)] = predicate
 
-# ============================================================================
-# MAIN POSTER FIGURE
-# ============================================================================
+# Main poster figure
 
 fig, ax = plt.subplots(figsize=(16, 12), facecolor='white')
 
@@ -137,9 +135,7 @@ plt.tight_layout()
 plt.savefig('metformin_kg_poster_main.png', dpi=300, bbox_inches='tight', facecolor='white')
 print("Saved main poster figure: metformin_kg_poster_main.png")
 
-# ============================================================================
-# SIMPLIFIED FIGURE 
-# ============================================================================
+# Simplified view (key nodes only)
 
 fig2, ax2 = plt.subplots(figsize=(14, 10), facecolor='white')
 
@@ -193,30 +189,11 @@ ax2.axis('off')
 plt.tight_layout()
 
 plt.savefig('metformin_kg_poster_simple.png', dpi=300, bbox_inches='tight', facecolor='white')
-print("✓ Saved simplified figure: metformin_kg_poster_simple.png")
+print("Saved simplified figure: metformin_kg_poster_simple.png")
 
-# ============================================================================
-# PRINT STATISTICS
-# ============================================================================
-
-print("\n" + "="*70)
-print("GRAPH STATISTICS")
-print("="*70)
-print(f"Total nodes: {G.number_of_nodes()}")
-print(f"Total edges: {G.number_of_edges()}")
-print(f"\nBreakdown by entity type:")
+print(f"Nodes: {G.number_of_nodes()}, edges: {G.number_of_edges()}")
 for node_type in node_styles.keys():
     count = len([n for n in G.nodes() if node_types.get(n) == node_type])
     print(f"  {node_type}: {count}")
 
-print(f"\nData integration:")
-print(f"  • DrugBank: 1 drug + 3 targets + 3 drug-target interactions")
-print(f"  • Reactome: 2 biochemical reactions + 2 pathways")
-print(f"  • SIDER: 5 adverse drug reactions with frequency data")
-print(f"  • Cross-source links: Drug → Targets → Reactions → Pathways")
-print(f"                        Drug → ADRs (with mechanistic hypotheses)")
-print("="*70)
-
 plt.show()
-
-print("\nVisualization complete!")
