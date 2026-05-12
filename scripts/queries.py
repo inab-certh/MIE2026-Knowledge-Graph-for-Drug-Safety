@@ -148,6 +148,6 @@ print("\n\nQuery 7: Entity counts by type")
 results = g.query(query7)
 for row in results:
     type_name = str(row.type).split('/')[-1]
-    print(f"  • {type_name}: {row.count}")
+    print(f"  {type_name}: {row[1]}")
 
 print("\nDone.")
