@@ -21,7 +21,7 @@ This repository accompanies our MIE 2026 paper on knowledge graph construction f
 ### Scripts
 - `create_metformin_kg.py` - Knowledge graph construction implementation
 - `visualize_kg.py` - Graph visualization generator
-- `query_examples.py` - SPARQL query demonstrations (7 queries)
+- `queries.py` - SPARQL query demonstrations (7 queries)
 
 ### Output
 - `metformin_kg.owl` - RDF/XML serialization
