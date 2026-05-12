@@ -5,6 +5,7 @@ Using actual data from DrugBank, SIDER, and Reactome
 Data collected: November 2025
 Run this to generate the RDF/OWL graph
 """
+import os
 
 from rdflib import Graph, Namespace, URIRef, Literal, RDF, RDFS, OWL
 from rdflib.namespace import XSD, DCTERMS
