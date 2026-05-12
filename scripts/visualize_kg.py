@@ -6,7 +6,10 @@ Simple, clean network diagram showing integration of 3 data sources
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import networkx as nx
+import os
 from rdflib import Graph, RDF, RDFS, Namespace
+
+os.makedirs('output', exist_ok=True)
 
 # Load the RDF graph
 print("Loading RDF graph...")
@@ -132,7 +135,7 @@ ax.axis('off')
 plt.tight_layout()
 
 # Save high-resolution figure for poster
-plt.savefig('metformin_kg_poster_main.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('output/metformin_kg_poster_main.png', dpi=300, bbox_inches='tight', facecolor='white')
 print("Saved main poster figure: metformin_kg_poster_main.png")
 
 # Simplified view (key nodes only)
@@ -188,7 +191,7 @@ ax2.set_title('Metformin ADR Knowledge Graph (Simplified View)',
 ax2.axis('off')
 plt.tight_layout()
 
-plt.savefig('metformin_kg_poster_simple.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('output/metformin_kg_poster_simple.png', dpi=300, bbox_inches='tight', facecolor='white')
 print("Saved simplified figure: metformin_kg_poster_simple.png")
 
 print(f"Nodes: {G.number_of_nodes()}, edges: {G.number_of_edges()}")
