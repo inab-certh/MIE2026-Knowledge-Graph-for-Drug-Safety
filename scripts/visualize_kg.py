@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import networkx as nx
 import os
+import scipy
 from rdflib import Graph, RDF, RDFS, Namespace
 
 os.makedirs('output', exist_ok=True)
