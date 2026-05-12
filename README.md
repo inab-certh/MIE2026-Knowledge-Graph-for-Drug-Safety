@@ -51,7 +51,7 @@ For this proof-of-concept, all steps were executed manually via database web int
 | Graph edges | 28 |
 | Protein targets | 3 (ETFDH, PRKAB1, SLC47A1) |
 | Biochemical reactions | 2 (R-HSA-9931292, R-HSA-434650) |
-| Pathways | 2 (AMPK signaling, Xenobiotic transport) |
+| Pathways | 2 (AMPK signalling, Xenobiotic transport) |
 | Adverse drug reactions | 5 (with quantified frequencies) |
 | Data sources integrated | 3 (DrugBank, Reactome, SIDER) |
 
@@ -204,46 +204,28 @@ The immediate next step is automating data extraction: DrugBank via XML parser o
 
 The graph structure naturally supports link prediction as a longer-term direction. Embedding methods such as TransE, DistMult, or ComplEx (or graph neural networks like R-GCN) could learn from existing drug-target-pathway-ADR relationships to predict missing associations. Neurosymbolic approaches are also worth exploring, where the symbolic structure of the RDF graph provides interpretable background knowledge to guide neural learning. Any predictions would require clinical validation before informing pharmacovigilance decisions.
 
-```
-Current Knowledge Graph          |  Link Prediction Application
-                                 |
-    Metformin                    |      Drug X
-       │                         |         │
-       │ targets                 |         │ targets
-       ▼                         |         ▼
-    PRKAB1 ────────┐             |      PRKAB1 ────────┐
-       │           │             |         │           │
-       │    participatesIn       |         │   participatesIn
-       ▼           │             |         ▼           │
-  AMPK pathway     │             |    AMPK pathway     │
-       │           │             |         │           │
-       │           │             |         │           │
-       ▼           │             |         ▼           │
-   Diarrhea ◄─────┘              |        ???  ◄───────┘
-  (observed)                     |    (PREDICT)
-                                 |
-Known relationships              |  ML model predicts missing
-from integrated data             |  drug-ADR link based on
-                                 |  shared molecular mechanisms
-```
-
 ```mermaid
-graph LR
-  subgraph Known["Known graph (Metformin)"]
-    M[Metformin] -->|targets| P[PRKAB1]
-    P -->|participatesIn| R[AMPK pathway]
-    R -->|linkedTo| D[Diarrhea — observed]
-  end
-
-  subgraph Predicted["Link prediction (Drug X)"]
-    X[Drug X] -->|targets| P2[PRKAB1]
-    P2 -->|participatesIn| R2[AMPK pathway]
-    R2 -.->|predict?| U[??? — predicted]
-  end
+graph TD
+  M[Metformin]:::drug -->|targets| P[PRKAB1]:::protein
+  P -->|participatesIn| R[AMPK signalling]:::pathway
+  R -->|linkedTo| D[Diarrhea - observed]:::adr
+  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
+  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+  classDef adr fill:#FAEEDA,stroke:#854F0B,color:#412402
 ```
-*Left: known relationships from the integrated graph. Right: candidate drug-ADR link predicted from shared pathway involvement.*
-
-**Figure**: Conceptual framework for link prediction. Left: known relationships from the integrated graph. Right: candidate drug-ADR link predicted from shared pathway involvement.
+*Fig. 1: Known relationships extracted from the integrated knowledge graph.*
+```mermaid
+graph TD
+  X[Drug X]:::drug -->|targets| P2[PRKAB1]:::protein
+  P2 -->|participatesIn| R2[AMPK signalling]:::pathway
+  R2 -.->|predict?| U[Unknown ADR?]:::predict
+  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
+  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+  classDef predict fill:#F1EFE8,stroke:#888780,color:#2C2C2A,stroke-dasharray:4 3
+```
+*Fig. 2: Candidate drug-ADR link predicted from shared pathway involvement.*
 
 ### Data Integration
 
