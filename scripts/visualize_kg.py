@@ -81,13 +81,14 @@ for node_type, style in node_styles.items():
                           ax=ax)
 
 # Draw edges
-nx.draw_networkx_edges(G, pos, 
+nx.draw_networkx_edges(G, pos,
                       edge_color='#95A5A6',
                       arrows=True,
-                      arrowsize=20,
-                      arrowstyle='->',
-                      width=2,
-                      alpha=0.6,
+                      arrowsize=30,
+                      min_source_margin=25,
+                      min_target_margin=25,
+                      width=1.5,
+                      alpha=0.8,
                       connectionstyle='arc3,rad=0.1',
                       ax=ax)
 
@@ -133,6 +134,7 @@ ax.set_title('Metformin Knowledge Graph: Multi-source integration\n' +
 
 ax.axis('off')
 plt.tight_layout()
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
 
 # Save high-resolution figure for poster
 plt.savefig('output/metformin_kg_poster_main.png', dpi=300, bbox_inches='tight', facecolor='white')
@@ -163,9 +165,11 @@ for node_type, style in node_styles.items():
 nx.draw_networkx_edges(H, pos2,
                       edge_color='#7F8C8D',
                       arrows=True,
-                      arrowsize=25,
-                      width=2.5,
-                      alpha=0.7,
+                      arrowsize=30,
+                      min_source_margin=25,
+                      min_target_margin=25,
+                      width=1.5,
+                      alpha=0.8,
                       connectionstyle='arc3,rad=0.1',
                       ax=ax2)
 
@@ -185,6 +189,7 @@ ax2.set_title('Metformin ADR Knowledge Graph (Simplified View)',
              fontsize=16, fontweight='bold', pad=20)
 ax2.axis('off')
 plt.tight_layout()
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
 
 plt.savefig('output/metformin_kg_poster_simple.png', dpi=300, bbox_inches='tight', facecolor='white')
 print("Saved simplified figure: metformin_kg_poster_simple.png")
