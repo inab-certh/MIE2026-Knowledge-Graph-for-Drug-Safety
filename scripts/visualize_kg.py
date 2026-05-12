@@ -148,7 +148,8 @@ clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrug
 key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
-pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
+#pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
+pos2 = nx.kamada_kawai_layout(H)
 
 # Draw simplified version
 for node_type, style in node_styles.items():
