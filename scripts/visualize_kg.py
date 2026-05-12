@@ -65,10 +65,8 @@ for s, p, o in g:
 
 # Main poster figure
 
-fig, ax = plt.subplots(figsize=(20, 14), facecolor='white')
-
-# Use hierarchical layout
-pos = nx.shell_layout(G)
+fig, ax = plt.subplots(figsize=(16, 12), facecolor='white')
+pos = nx.spring_layout(G, k=2.5, iterations=100, seed=42)
 
 # Draw nodes by type
 for node_type, style in node_styles.items():
@@ -142,7 +140,7 @@ print("Saved main poster figure: metformin_kg_poster_main.png")
 
 # Simplified view (key nodes only)
 
-fig2, ax2 = plt.subplots(figsize=(18, 14), facecolor='white')
+fig2, ax2 = plt.subplots(figsize=(14, 10), facecolor='white')
 
 # Focus on key connections: Drug → Targets → Reactions/Pathways → ADRs
 # Remove some nodes for clarity
@@ -150,7 +148,7 @@ clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrug
 key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
-pos2 = nx.shell_layout(H)
+pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
 
 # Draw simplified version
 for node_type, style in node_styles.items():
