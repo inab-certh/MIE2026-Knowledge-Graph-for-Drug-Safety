@@ -6,13 +6,13 @@
 **Authors**: Kalliopi Kastampolidou, Pantelis Natsiavas  
 **Institution**: Institute of Applied Biosciences, Centre for Research & Technology Hellas, Greece
 
-**Status**: Submitted to MIE 2026 - Under Review
+**Status**: Submitted to MIE 2026 - Accepted
 
 ---
 
 ## Abstract
 
-This repository contains the complete implementation of our conference paper presenting a reproducible pipeline for integrating heterogeneous biomedical data into RDF/OWL knowledge graphs. The pipeline combines drug-target interactions (DrugBank), biochemical pathways (Reactome), and adverse drug reactions (SIDER) following defined extraction rules. We demonstrate feasibility through a metformin proof-of-concept resulting in 139 RDF triples linking molecular targets to clinical adverse effects.
+This repository accompanies our MIE 2026 paper on knowledge graph construction for adverse drug reaction analysis. The pipeline integrates data from three sources (DrugBank (drug-target interactions), Reactome (biochemical pathways) and SIDER (adverse effects)) into RDF/OWL knowledge graphs following defined extraction rules. As a proof-of-concept, we applied it to metformin, yielding 139 RDF triples that link molecular targets to clinical adverse effects across all three sources.
 
 ---
 
