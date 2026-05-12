@@ -38,9 +38,7 @@ g.add((KG.MetforminKG, DCTERMS.created, Literal(datetime.now().isoformat(), data
 g.add((KG.MetforminKG, DCTERMS.description, 
        Literal("Integration of metformin data from DrugBank, SIDER, and Reactome for ADR mechanism analysis")))
 
-# ============================================================================
-# DRUG
-# ============================================================================
+# Drug entity
 
 metformin = KG.Metformin
 g.add((metformin, RDF.type, KG.Drug))
@@ -53,9 +51,7 @@ g.add((metformin, KG.drugClass, Literal("Antidiabetic, Biguanide")))
 g.add((metformin, RDFS.comment, 
        Literal("A medication used alongside diet and exercise to control blood sugar in patients with type 2 diabetes.")))
 
-# ============================================================================
-# PROTEIN TARGETS (from DrugBank)
-# ============================================================================
+# Protein targets (DrugBank)
 
 # Target 1: ETFDH (Electron transfer flavoprotein-ubiquinone oxidoreductase)
 etfdh = KG.ETFDH
@@ -98,9 +94,7 @@ g.add((slc47a1, RDFS.comment,
        Literal("Plays a physiological role in the excretion of cationic compounds including drugs and toxins through kidney and liver")))
 g.add((slc47a1, DCTERMS.source, Literal("DrugBank")))
 
-# ============================================================================
-# DRUG-TARGET RELATIONSHIPS (from DrugBank)
-# ============================================================================
+# Drug-target interactions (DrugBank)
 
 # Metformin inhibits ETFDH (mitochondrial complex I pathway)
 interaction1 = KG.Metformin_ETFDH_Interaction
@@ -132,9 +126,7 @@ g.add((interaction3, KG.actionType, Literal("Modulator")))
 g.add((interaction3, KG.pharmacologicalAction, Literal("Unknown")))
 g.add((interaction3, DCTERMS.source, Literal("DrugBank")))
 
-# ============================================================================
-# BIOCHEMICAL REACTIONS (from Reactome)
-# ============================================================================
+# Biochemical reactions (Reactome)
 
 # Reaction 1: AMPK phosphorylation (involving PRKAB1)
 reaction1 = REACTOME["R-HSA-9931292"]
@@ -160,9 +152,7 @@ g.add((metformin, KG.participatesIn, reaction1))
 g.add((slc47a1, KG.participatesIn, reaction2))
 g.add((metformin, KG.participatesIn, reaction2))
 
-# ============================================================================
-# PATHWAYS (from Reactome - Level 3)
-# ============================================================================
+# Pathways (Reactome)
 
 # Pathway 1: AMPK signaling
 ampk_pathway = KG.AMPK_Signaling_Pathway
@@ -180,9 +170,7 @@ g.add((transport_pathway, KG.pathwayCategory, Literal("Drug Metabolism")))
 g.add((transport_pathway, DCTERMS.source, Literal("Reactome")))
 g.add((reaction2, KG.partOf, transport_pathway))
 
-# ============================================================================
-# ADVERSE DRUG REACTIONS (from SIDER)
-# ============================================================================
+# Adverse drug reactions (SIDER)
 
 # ADR 1: Diarrhea
 diarrhea = KG.Diarrhea
@@ -227,9 +215,7 @@ g.add((infection, RDFS.label, Literal("Infection")))
 g.add((infection, KG.incidenceRate, Literal("20.5% - 20.9%")))
 g.add((infection, DCTERMS.source, Literal("SIDER")))
 
-# ============================================================================
-# DRUG-ADR RELATIONSHIPS (from SIDER)
-# ============================================================================
+# Drug-ADR relationships (SIDER)
 
 g.add((metformin, KG.causes, diarrhea))
 g.add((metformin, KG.causes, gi_disorder))
@@ -237,9 +223,7 @@ g.add((metformin, KG.causes, nausea))
 g.add((metformin, KG.causes, vomiting))
 g.add((metformin, KG.causes, infection))
 
-# ============================================================================
-# MECHANISTIC LINKS (Inferred from integration + literature)
-# ============================================================================
+# Mechanistic links
 
 # Link 1: Drug transport affects GI accumulation → GI ADRs
 mechanism1 = KG.GI_Mechanism
@@ -273,9 +257,7 @@ g.add((mechanism3, RDFS.comment,
        Literal("Metformin inhibition of mitochondrial complex I affects cellular respiration")))
 g.add((mechanism3, KG.evidenceLevel, Literal("Well-established in literature")))
 
-# ============================================================================
-# EXPORT
-# ============================================================================
+# Serialise/export
 
 # Save as RDF/XML (OWL format)
 g.serialize(destination='metformin_kg.owl', format='xml')
@@ -289,40 +271,18 @@ print("✓ Saved as metformin_kg.ttl (Turtle format)")
 g.serialize(destination='metformin_kg.nt', format='nt')
 print("✓ Saved as metformin_kg.nt (N-Triples format)")
 
-# ============================================================================
-# STATISTICS
-# ============================================================================
-
-print("\n" + "="*70)
-print("METFORMIN KNOWLEDGE GRAPH - PROOF OF CONCEPT")
-print("="*70)
-print(f"Total RDF triples: {len(g)}")
-print("\nEntity Counts:")
-print(f"  Drugs: 1 (Metformin)")
-print(f"  Protein targets: 3 (ETFDH, PRKAB1, SLC47A1)")
-print(f"  Drug-target interactions: 3")
-print(f"  Biochemical reactions: 2 (from Reactome)")
-print(f"  Pathways: 2 (AMPK signaling, Xenobiotic transport)")
-print(f"  Adverse drug reactions: 5 (GI effects + infection)")
-print(f"  Mechanistic hypotheses: 3")
-print("\nData Sources:")
-print(f"  • DrugBank (drug-target relationships)")
-print(f"  • SIDER (adverse effect frequencies)")
-print(f"  • Reactome (biochemical reactions and pathways)")
-print("\nIntegration Points:")
-print(f"  • Drug → 3 Targets → 2 Reactions → 2 Pathways")
-print(f"  • Drug → 5 ADRs")
-print(f"  • Targets/Pathways → ADRs (mechanistic hypotheses)")
-print("="*70)
+# Statistics
+print(f"Graph built: {len(g)} triples")
+print(f"Entities: 1 drug, 3 proteins, 2 reactions, 2 pathways, 5 ADRs, 3 mechanistic hypotheses")
+print(f"Sources: DrugBank, Reactome, SIDER")
 
 # Print sample triples for verification
-print("\nSample RDF Triples (first 15):")
-print("-"*70)
+print("\nSample triples:")
 for i, (s, p, o) in enumerate(list(g)[:15], 1):
     subj = s.n3(g.namespace_manager)
     pred = p.n3(g.namespace_manager)
     obj = o.n3(g.namespace_manager)
-    print(f"{i:2}. {subj} {pred} {obj[:60]}...")
+    print(f"  {i:2}. {subj} {pred} {obj[:60]}")
 
 print("\nGraph construction complete!")
 print("\nNext steps:")
