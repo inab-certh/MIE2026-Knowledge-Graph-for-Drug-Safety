@@ -9,14 +9,9 @@ print("Loading metformin knowledge graph...")
 g = Graph()
 g.parse("../output/metformin_kg.ttl", format="turtle")
 
-print(f"\n{'='*70}")
-print("METFORMIN KNOWLEDGE GRAPH - QUERY EXAMPLES")
-print(f"{'='*70}")
-print(f"Total triples in graph: {len(g)}\n")
+print(f"Loaded {len(g)} triples\n")
 
-# =============================================================================
-# QUERY 1: What proteins does metformin target?
-# =============================================================================
+# Query 1: What proteins does metformin target?
 query1 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -30,14 +25,11 @@ WHERE {
 """
 
 print("Query 1: What proteins does metformin target?")
-print("-" * 70)
 results = g.query(query1)
 for row in results:
     print(f"  • {row.protein} (Gene: {row.gene})")
 
-# =============================================================================
-# QUERY 2: What adverse reactions does metformin cause?
-# =============================================================================
+# Query 2: What adverse reactions does metformin cause?
 query2 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -53,7 +45,6 @@ ORDER BY DESC(?rate)
 """
 
 print("\n\nQuery 2: What adverse reactions does metformin cause?")
-print("-" * 70)
 results = g.query(query2)
 for row in results:
     freq = row.frequency if row.frequency else "not specified"
@@ -62,9 +53,7 @@ for row in results:
     print(f"    Frequency: {freq}")
     print(f"    Incidence: {rate}")
 
-# =============================================================================
-# QUERY 3: Which biochemical reactions involve metformin?
-# =============================================================================
+# Query 3: Which biochemical reactions involve metformin?
 query3 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -79,15 +68,12 @@ WHERE {
 """
 
 print("\n\nQuery 3: Which biochemical reactions involve metformin?")
-print("-" * 70)
 results = g.query(query3)
 for row in results:
     print(f"  • {row.reaction}")
     print(f"    Reactome ID: {row.reactome_id}")
 
-# =============================================================================
-# QUERY 4: Complete integration chain (Drug → Target → Reaction → Pathway)
-# =============================================================================
+# Query 4: Complete integration chain (Drug → Target → Reaction → Pathway)
 query4 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -104,14 +90,11 @@ WHERE {
 """
 
 print("\n\nQuery 4: Integration chain (Drug → Target → Reaction → Pathway)")
-print("-" * 70)
 results = g.query(query4)
 for row in results:
     print(f"  Metformin → {row.protein} → {row.reaction} → {row.pathway}")
 
-# =============================================================================
-# QUERY 5: Data provenance - where does our data come from?
-# =============================================================================
+# Query 5: Data provenance - where does our data come from?
 query5 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -125,14 +108,11 @@ ORDER BY DESC(?triple_count)
 """
 
 print("\n\nQuery 5: Data provenance - where does our data come from?")
-print("-" * 70)
 results = g.query(query5)
 for row in results:
     print(f"  • {row.source}: {row.triple_count} triples")
 
-# =============================================================================
-# QUERY 6: Get all information about a specific protein
-# =============================================================================
+# Query 6: Get all information about a specific protein
 query6 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -145,15 +125,12 @@ WHERE {
 """
 
 print("\n\nQuery 6: All information about PRKAB1 (AMPK protein)")
-print("-" * 70)
 results = g.query(query6)
 for row in results:
     prop_name = str(row.property).split('#')[-1].split('/')[-1]
     print(f"  • {prop_name}: {row.value}")
 
-# =============================================================================
-# QUERY 7: How many entities of each type?
-# =============================================================================
+# Query 7: How many entities of each type?
 query7 = """
 PREFIX kg: <http://example.org/adr-kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -168,12 +145,9 @@ ORDER BY DESC(?count)
 """
 
 print("\n\nQuery 7: Entity counts by type")
-print("-" * 70)
 results = g.query(query7)
 for row in results:
     type_name = str(row.type).split('/')[-1]
     print(f"  • {type_name}: {row.count}")
 
-print("\n" + "="*70)
-print("All queries completed successfully!")
-print("="*70)
+print("\nDone.")
