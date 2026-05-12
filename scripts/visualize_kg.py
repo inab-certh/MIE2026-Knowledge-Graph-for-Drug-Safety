@@ -116,14 +116,14 @@ for node_type, style in node_styles.items():
         mpatches.Patch(color=style['color'], label=label)
     )
 
-ax.legend(handles=legend_elements, 
+ax.legend(handles=legend_elements,
+         bbox_to_anchor=(1.01, 1),
          loc='upper left',
          fontsize=11,
          frameon=True,
-         fancybox=True,
-         shadow=True,
          title='Entity Types & Sources',
          title_fontsize=12)
+plt.subplots_adjust(right=0.82)
 
 # Title
 ax.set_title('Metformin Knowledge Graph: Multi-source integration\n' + 
@@ -178,10 +178,13 @@ nx.draw_networkx_labels(H, pos2, display_labels2,
                        ax=ax2)
 
 ax2.legend(handles=legend_elements,
+          bbox_to_anchor=(1.01, 1),
           loc='upper left',
           fontsize=12,
+          frameon=True,
           title='Data Sources',
           title_fontsize=13)
+plt.subplots_adjust(right=0.82)
 
 ax2.set_title('Metformin ADR Knowledge Graph (Simplified View)',
              fontsize=16, fontweight='bold', pad=20)
