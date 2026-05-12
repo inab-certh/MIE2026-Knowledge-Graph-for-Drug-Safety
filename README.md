@@ -35,28 +35,8 @@ This repository accompanies our MIE 2026 paper on knowledge graph construction f
 
 ### Pipeline Design
 
-Our pipeline implements four extraction rules applied to any drug:
-
-**Step 1: DrugBank Extraction**  
-Input: DrugBank identifier (e.g., DB00331)  
-Extract: All protein targets  
-Data: Gene symbol, UniProt ID, action type (inhibitor/activator/modulator)
-
-**Step 2: Reactome Extraction**  
-Input: ChEBI identifier (e.g., CHEBI:6801)  
-Extract: All biochemical reactions  
-Data: Reaction identifiers (R-HSA-*), pathway associations
-
-**Step 3: SIDER Extraction**  
-Input: PubChem identifier (e.g., 4091)  
-Extract: Top 5 adverse reactions ranked by frequency  
-Data: ADR names, incidence rates, placebo comparisons
-
-**Step 4: Identifier Mapping**  
-Maintain: Cross-database identifier table  
-Link: DrugBank, ChEBI, PubChem, ATC codes
-
-Note: This proof-of-concept employed manual extraction via database web interfaces. Automated extraction using database APIs is planned as future work.
+The pipeline applies four extraction steps to any target drug. First, all protein targets are retrieved from DrugBank using the drug's DrugBank identifier (gene symbol, UniProt ID, action type). Second, biochemical reactions are extracted from Reactome via the drug's ChEBI identifier, capturing reaction IDs and pathway associations. Third, the top five adverse reactions by incidence frequency are retrieved from SIDER using the PubChem identifier, including placebo-controlled rates where available. Finally, a cross-database identifier table is maintained to link DrugBank, ChEBI, PubChem, and ATC codes throughout.
+For this proof-of-concept, all steps were executed manually via database web interfaces. Automation is planned as future work.
 
 ---
 
@@ -294,7 +274,7 @@ While such predictions require clinical validation, they could prioritize pharma
 
 ## Citation
 
-**Status**: Submitted to Medical Informatics Europe (MIE) 2026 - Under Review
+**Status**: Accepted at Medical Informatics Europe (MIE) 2026 - Poster presentation
 
 If you use this work, please contact the authors for appropriate citation:
 - Kalliopi Kastampolidou (kkastampolidou@certh.gr)
