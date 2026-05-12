@@ -65,7 +65,7 @@ for s, p, o in g:
 
 # Main poster figure
 
-fig, ax = plt.subplots(figsize=(16, 12), facecolor='white')
+fig, ax = plt.subplots(figsize=(20, 14), facecolor='white')
 
 # Use hierarchical layout
 pos = nx.spring_layout(G, k=2.5, iterations=100, seed=42)
@@ -134,7 +134,7 @@ ax.set_title('Metformin Knowledge Graph: Multi-source integration\n' +
 
 ax.axis('off')
 plt.tight_layout()
-plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+plt.subplots_adjust(left=0.15, right=0.88, top=0.92, bottom=0.08)
 
 # Save high-resolution figure for poster
 plt.savefig('output/metformin_kg_poster_main.png', dpi=300, bbox_inches='tight', facecolor='white')
@@ -189,7 +189,7 @@ ax2.set_title('Metformin ADR Knowledge Graph (Simplified View)',
              fontsize=16, fontweight='bold', pad=20)
 ax2.axis('off')
 plt.tight_layout()
-plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+plt.subplots_adjust(left=0.15, right=0.88, top=0.92, bottom=0.08)
 
 plt.savefig('output/metformin_kg_poster_simple.png', dpi=300, bbox_inches='tight', facecolor='white')
 print("Saved simplified figure: metformin_kg_poster_simple.png")
