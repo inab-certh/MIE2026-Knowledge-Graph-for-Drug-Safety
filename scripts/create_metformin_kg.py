@@ -261,15 +261,15 @@ g.add((mechanism3, KG.evidenceLevel, Literal("Well-established in literature")))
 
 # Save as RDF/XML (OWL format)
 g.serialize(destination='metformin_kg.owl', format='xml')
-print("✓ Saved as metformin_kg.owl (RDF/XML format)")
+print("Saved as metformin_kg.owl (RDF/XML format)")
 
 # Save as Turtle (most readable)
 g.serialize(destination='metformin_kg.ttl', format='turtle')
-print("✓ Saved as metformin_kg.ttl (Turtle format)")
+print("Saved as metformin_kg.ttl (Turtle format)")
 
 # Save as N-Triples
 g.serialize(destination='metformin_kg.nt', format='nt')
-print("✓ Saved as metformin_kg.nt (N-Triples format)")
+print("Saved as metformin_kg.nt (N-Triples format)")
 
 # Statistics
 print(f"Graph built: {len(g)} triples")
