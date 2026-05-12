@@ -10,6 +10,8 @@ from rdflib import Graph, Namespace, URIRef, Literal, RDF, RDFS, OWL
 from rdflib.namespace import XSD, DCTERMS
 from datetime import datetime
 
+os.makedirs('output', exist_ok=True)
+
 # Create graph
 g = Graph()
 
