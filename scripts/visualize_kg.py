@@ -179,7 +179,7 @@ nx.draw_networkx_labels(H, pos2, display_labels2,
 
 ax2.legend(handles=legend_elements,
           bbox_to_anchor=(1.01, 1),
-          loc='upper left',
+          loc='upper right',
           fontsize=12,
           frameon=True,
           title='Data Sources',
