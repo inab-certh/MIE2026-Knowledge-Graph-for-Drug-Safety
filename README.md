@@ -228,28 +228,20 @@ from integrated data             |  drug-ADR link based on
 ```
 
 ```mermaid
-graph TD
-  M[Metformin]:::drug -->|targets| P[PRKAB1]:::protein
-  M -->|targets| P2[ETFDH]:::protein
-  M -->|targets| P3[SLC47A1]:::protein
-  P -->|participatesIn| R[AMPK signalling]:::pathway
-  M -->|causes| D[Diarrhea 9.6–53%]:::adr
-  M -->|causes| N[Nausea 6.5–25%]:::adr
-  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
-  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
-  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-  classDef adr fill:#FAEEDA,stroke:#854F0B,color:#412402
+graph LR
+  subgraph Known["Known graph (Metformin)"]
+    M[Metformin] -->|targets| P[PRKAB1]
+    P -->|participatesIn| R[AMPK pathway]
+    R -->|linkedTo| D[Diarrhea — observed]
+  end
+
+  subgraph Predicted["Link prediction (Drug X)"]
+    X[Drug X] -->|targets| P2[PRKAB1]
+    P2 -->|participatesIn| R2[AMPK pathway]
+    R2 -.->|predict?| U[??? — predicted]
+  end
 ```
-```mermaid
-graph TD
-  X[Drug X]:::drug -->|targets| P[PRKAB1]:::protein
-  P -->|participatesIn| R[AMPK signalling]:::pathway
-  R -.->|predict?| U[Unknown ADR?]:::predict
-  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
-  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
-  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-  classDef predict fill:#F1EFE8,stroke:#888780,color:#2C2C2A,stroke-dasharray:4 3
-```
+*Left: known relationships from the integrated graph. Right: candidate drug-ADR link predicted from shared pathway involvement.*
 
 **Figure**: Conceptual framework for link prediction. Left: known relationships from the integrated graph. Right: candidate drug-ADR link predicted from shared pathway involvement.
 
