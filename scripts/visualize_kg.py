@@ -39,8 +39,8 @@ for s, p, o in g:
     if p == RDFS.label:
         label = str(o)
         # Shorten long labels for readability
-        if len(label) > 40:
-            label = label[:37] + "..."
+        if len(label) > 55:
+            label = label[:52] + "..."
         node_labels[str(s)] = label
     
     # Get types
@@ -144,13 +144,8 @@ fig2, ax2 = plt.subplots(figsize=(14, 10), facecolor='white')
 
 # Focus on key connections: Drug → Targets → Reactions/Pathways → ADRs
 # Remove some nodes for clarity
-key_nodes = [n for n in G.nodes() if any([
-    'Metformin' in node_labels.get(n, ''),
-    node_types.get(n) == 'Protein',
-    node_types.get(n) == 'AdverseDrugReaction',
-    'AMPK' in node_labels.get(n, ''),
-    'extrusion' in node_labels.get(n, ''),
-])]
+clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrugReaction'}
+key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
 pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
