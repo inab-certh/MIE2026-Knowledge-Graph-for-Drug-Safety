@@ -6,13 +6,13 @@
 **Authors**: Kalliopi Kastampolidou, Pantelis Natsiavas  
 **Institution**: Institute of Applied Biosciences, Centre for Research & Technology Hellas, Greece
 
-**Status**: Submitted to MIE 2026 - Accepted
+**Status**: Accepted at MIE 2026 - Poster presentation
 
 ---
 
 ## Abstract
 
-This repository accompanies our MIE 2026 paper on knowledge graph construction for adverse drug reaction analysis. The pipeline integrates data from three sources (DrugBank (drug-target interactions), Reactome (biochemical pathways) and SIDER (adverse effects)) into RDF/OWL knowledge graphs following defined extraction rules. As a proof-of-concept, we applied it to metformin, yielding 139 RDF triples that link molecular targets to clinical adverse effects across all three sources.
+This repository accompanies our MIE 2026 paper on knowledge graph construction for adverse drug reaction analysis. The pipeline integrates data from three sources - DrugBank (drug-target interactions), Reactome (biochemical pathways) and SIDER (adverse effects) - into RDF/OWL knowledge graphs following defined extraction rules. As a proof-of-concept, we applied it to metformin, yielding 139 RDF triples that link molecular targets to clinical adverse effects across all three sources.
 
 ---
 
@@ -198,21 +198,11 @@ Edges represent typed relationships (targets, participatesIn, partOf, causes).
 
 ### Automation and Scaling
 
-**Short-term objectives:**
-1. Implement automated data extraction using database APIs
-   - DrugBank: XML parser or commercial API access
-   - Reactome: ContentService REST API integration
-   - SIDER: Bulk TSV file processing
-2. Apply pipeline to comprehensive drug sets (target: 50-100 antidiabetic drugs)
-3. Develop batch processing capabilities
+The immediate next step is automating data extraction: DrugBank via XML parser or API, Reactome via the ContentService REST API, and SIDER via bulk TSV processing. This would allow the pipeline to scale to larger and more diverse drug sets.
 
 ### Advanced Applications: Link Prediction
 
-The knowledge graph structure enables machine learning applications for predicting missing relationships. Knowledge graph embedding methods (TransE, DistMult, ComplEx) or graph neural networks (R-GCN, CompGCN) could learn representations of entities to predict:
-
-- Unknown drug-ADR associations based on shared molecular mechanisms
-- Potential off-target protein interactions
-- Novel mechanistic pathways linking drugs to adverse effects
+The graph structure naturally supports link prediction as a longer-term direction. Embedding methods such as TransE, DistMult, or ComplEx (or graph neural networks like R-GCN) could learn from existing drug-target-pathway-ADR relationships to predict missing associations. Neurosymbolic approaches are also worth exploring, where the symbolic structure of the RDF graph provides interpretable background knowledge to guide neural learning. Any predictions would require clinical validation before informing pharmacovigilance decisions.
 
 ```
 Current Knowledge Graph          |  Link Prediction Application
@@ -237,17 +227,35 @@ from integrated data             |  drug-ADR link based on
                                  |  shared molecular mechanisms
 ```
 
-**Figure**: Conceptual framework for link prediction. Left: Current knowledge graph with known relationships. Right: Prediction of unknown drug-ADR associations (red dashed line) based on shared protein targets and pathway involvement patterns learned from existing data.
+```mermaid
+graph TD
+  M[Metformin]:::drug -->|targets| P[PRKAB1]:::protein
+  M -->|targets| P2[ETFDH]:::protein
+  M -->|targets| P3[SLC47A1]:::protein
+  P -->|participatesIn| R[AMPK signalling]:::pathway
+  M -->|causes| D[Diarrhea 9.6–53%]:::adr
+  M -->|causes| N[Nausea 6.5–25%]:::adr
+  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
+  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+  classDef adr fill:#FAEEDA,stroke:#854F0B,color:#412402
+```
+```mermaid
+graph TD
+  X[Drug X]:::drug -->|targets| P[PRKAB1]:::protein
+  P -->|participatesIn| R[AMPK signalling]:::pathway
+  R -.->|predict?| U[Unknown ADR?]:::predict
+  classDef drug fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+  classDef protein fill:#EEEDFE,stroke:#534AB7,color:#26215C
+  classDef pathway fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+  classDef predict fill:#F1EFE8,stroke:#888780,color:#2C2C2A,stroke-dasharray:4 3
+```
 
-While such predictions require clinical validation, they could prioritize pharmacovigilance investigations and support early safety signal detection.
+**Figure**: Conceptual framework for link prediction. Left: known relationships from the integrated graph. Right: candidate drug-ADR link predicted from shared pathway involvement.
 
 ### Data Integration
 
-**Long-term objectives:**
-- Integrate PharmGKB (pharmacogenomic variants)
-- Integrate CTD (gene-disease associations)
-- Integrate STRING (protein-protein interactions)
-- Develop SPARQL endpoint for web-based queries
+Candidate sources for future integration include PharmGKB (pharmacogenomic variants), CTD (gene-disease associations), and STRING (protein-protein interactions). A public SPARQL endpoint would make the graph queryable without local setup.
 
 ---
 
