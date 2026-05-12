@@ -140,7 +140,7 @@ print("Saved main poster figure: metformin_kg_poster_main.png")
 
 # Simplified view (key nodes only)
 
-fig2, ax2 = plt.subplots(figsize=(14, 10), facecolor='white')
+fig2, ax2 = plt.subplots(figsize=(18, 14), facecolor='white')
 
 # Focus on key connections: Drug → Targets → Reactions/Pathways → ADRs
 # Remove some nodes for clarity
@@ -148,7 +148,7 @@ clean_types = {'Drug', 'Protein', 'BiochemicalReaction', 'Pathway', 'AdverseDrug
 key_nodes = [n for n in G.nodes() if node_types.get(n) in clean_types]
 
 H = G.subgraph(key_nodes)
-pos2 = nx.spring_layout(H, k=3, iterations=100, seed=42)
+pos2 = nx.spring_layout(H, k=4, iterations=100, seed=42)
 
 # Draw simplified version
 for node_type, style in node_styles.items():
@@ -169,7 +169,7 @@ nx.draw_networkx_edges(H, pos2,
                       connectionstyle='arc3,rad=0.1',
                       ax=ax2)
 
-display_labels2 = {n: node_labels.get(n, n.split('/')[-1])[:30] for n in H.nodes()}
+display_labels2 = {n: node_labels.get(n, n.split('/')[-1])[:35] for n in H.nodes()}
 nx.draw_networkx_labels(H, pos2, display_labels2,
                        font_size=10,
                        font_weight='bold',
